@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Location Alarm</string>
+    <string name="alarm_active_title">Location Alarm Active</string>
+    <string name="alarm_active_desc">Monitoring distance to destination in background…</string>
+    <string name="alarm_triggered_title">Target Reached!</string>
+    <string name="alarm_triggered_desc">You have arrived within your destination radius.</string>
+</resources>
