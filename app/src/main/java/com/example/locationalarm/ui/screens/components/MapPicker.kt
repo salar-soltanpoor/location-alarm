@@ -68,7 +68,7 @@ fun MapPicker(
     // Keep camera and marker updated when target destination changes externally
     LaunchedEffect(targetLatLng) {
         markerState.position = targetLatLng
-        if (cameraPositionState.position.target != targetLatLng) {
+        if (!cameraPositionState.isMoving && cameraPositionState.position.target != targetLatLng) {
             cameraPositionState.animate(
                 CameraUpdateFactory.newLatLng(targetLatLng),
             )
@@ -124,7 +124,15 @@ fun MapPicker(
 
             // Sync marker drag end position with destination state
             LaunchedEffect(markerState.position) {
-                if (markerState.position != targetLatLng) {
+                val distanceMeters = FloatArray(1)
+                android.location.Location.distanceBetween(
+                    markerState.position.latitude,
+                    markerState.position.longitude,
+                    targetLatLng.latitude,
+                    targetLatLng.longitude,
+                    distanceMeters
+                )
+                if (distanceMeters[0] > 1f) {
                     onLocationSelected(
                         markerState.position.latitude,
                         markerState.position.longitude,
