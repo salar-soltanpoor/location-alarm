@@ -4,7 +4,6 @@ import android.Manifest
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -191,7 +190,8 @@ fun MainScreen(
                 destinationName = targetDestination.name,
                 onLocationSelected = { lat, lng ->
                     viewModel.onMapLocationSelected(lat, lng)
-                }
+                },
+                isAlarmActive = alarmState !is AlarmState.Idle
             )
 
             // Destination Name & Coordinate Form
